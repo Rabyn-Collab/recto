@@ -1,5 +1,6 @@
 import React from 'react'
 import HomePage from './pages/HomePage'
+import Simple from './components/Simple'
 
 const App = () => {
 
@@ -7,6 +8,7 @@ const App = () => {
     <div>
 
       <HomePage />
+      <Simple name={'sajdjak'} age={90} />
     </div>
   )
 }

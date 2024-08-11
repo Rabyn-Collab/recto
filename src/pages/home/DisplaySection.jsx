@@ -10,7 +10,7 @@ const DisplaySection = () => {
       </div>
 
 
-      <div>
+      <div >
         <h1 className='text-3xl font-bold'>Hi, I am John</h1>
         <p className='text-pink-700 italic'> Some Dev, Freelancer, All Rounder</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores mollitia omnis repellat modi commodi, pariatur enim unde consequuntur corrupti in quibusdam maxime excepturi cum nam quod, voluptates sint veritatis vitae.</p>

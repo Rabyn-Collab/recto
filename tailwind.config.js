@@ -4,8 +4,17 @@ module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        'auto-grid': 'repeat(auto-fit, minmax(300px, 1fr))'
+      }
 
     },
+
+
+    // colors: {
+    //   'primary': '#C5705D'
+    // },
+
 
     screens: {
       '2xl': { 'max': '1536px' },

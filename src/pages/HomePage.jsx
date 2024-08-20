@@ -1,12 +1,18 @@
 import React from 'react'
+import { persons } from '../app_data/data'
 
 const HomePage = () => {
+
   return (
     <div>
 
-      <h1 className='ht'>Hello Jee</h1>
-      <h1 className='ht'>Hello Wee</h1>
-      <h1 className='ht'>Hello See</h1>
+      {persons.map((per) => {
+        return <div key={per.id}>
+          <h1>{per.name}</h1>
+        </div>
+      })}
+
+
     </div>
   )
 }

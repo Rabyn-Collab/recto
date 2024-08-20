@@ -1,27 +1,32 @@
-export const movie = {
-  "Title": "Avatar",
-  "Year": "2009",
-  "Released": "18 Dec 2009",
-  "Runtime": "162 min",
-  "Genre": "Action, Adventure, Fantasy",
-  "Director": "James Cameron",
-  "Writer": "James Cameron",
-  "Actors": "Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang",
-  "Plot": "A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
-  "Language": "English, Spanish",
-  "Country": "USA, UK",
-  "Awards": "Won 3 Oscars. Another 80 wins & 121 nominations.",
-  "Poster": "http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg",
-  "Metascore": "83",
-  "imdbRating": "7.9",
-  "imdbVotes": "890,617",
-  "imdbID": "tt0499549",
-};
 
 
 
-export const age = 90;
 
-export const func = () => {
+export const persons = [
+  { id: 1, name: 'ram', age: 90 },
+  { id: 2, name: 'shyam', age: 70 },
+  { id: 3, name: 'sita', age: 60 },
+];
 
-}
+export const todos = [
+  {
+    "id": 1,
+    "title": "delectus aut autem",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "quis ut nam facilis et officia qui",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "fugiat veniam minus",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "title": "et porro tempora",
+    "completed": true
+  },
+];

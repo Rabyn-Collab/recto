@@ -4,6 +4,7 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import RootLayout from './components/RootLayout';
 import HomePage from './pages/HomePage';
+import ItemsPages from './pages/ItemsPages';
 //
 const App = () => {
 
@@ -15,6 +16,10 @@ const App = () => {
         {
           index: true,
           element: <HomePage />
+        },
+        {
+          path: 'item/:category',
+          element: <ItemsPages />
         },
         {
           path: 'about-page',

@@ -1,16 +1,23 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { categoryUrl } from "../app_data/api_urls";
+import { categoryUrl, getItems } from "../app_data/api_urls";
 import ListCard from "../components/ListCard";
+import { useParams } from "react-router";
 
 
-const HomePage = () => {
+const ItemsPages = () => {
+  const { category } = useParams();
+
   const [data, setData] = useState();
 
   const getData = async () => {
     try {
-      const response = await axios.get(categoryUrl);
+      const response = await axios.get(getItems, {
+        params: {
+          c: category
+        }
+      });
       setData(response.data);
     } catch (err) {
 
@@ -27,13 +34,14 @@ const HomePage = () => {
 
   }, []);
 
+  console.log(data);
+
 
 
   return (
     <div className="p-4">
 
 
-      {data && <ListCard categories={data.categories} />}
 
 
 
@@ -44,4 +52,4 @@ const HomePage = () => {
     </div>
   )
 }
-export default HomePage
+export default ItemsPages

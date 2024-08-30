@@ -1,14 +1,47 @@
-import React from 'react'
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
+import { categoryUrl } from "../app_data/api_urls";
+import ListCard from "../components/ListCard";
+
 
 const HomePage = () => {
-  return (
-    <div>
+  const [data, setData] = useState();
 
-      <h1 className='ht'>Hello Jee</h1>
-      <h1 className='ht'>Hello Wee</h1>
-      <h1 className='ht'>Hello See</h1>
+  const getData = async () => {
+    try {
+      const response = await axios.get(categoryUrl);
+      setData(response.data);
+    } catch (err) {
+
+    }
+
+  }
+
+  console.log(data);
+
+
+
+
+  useEffect(() => {
+    getData();
+
+  }, []);
+
+
+
+  return (
+    <div className="p-4">
+
+      {data && <ListCard categories={data.categories} />}
+
+
+
+
+
+
+
     </div>
   )
 }
-
 export default HomePage

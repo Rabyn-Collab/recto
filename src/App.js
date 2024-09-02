@@ -5,6 +5,7 @@ import ContactPage from './pages/ContactPage';
 import RootLayout from './components/RootLayout';
 import HomePage from './pages/HomePage';
 import ItemsPages from './pages/ItemsPages';
+import ItemDetail from './pages/ItemDetail';
 //
 const App = () => {
 
@@ -20,6 +21,10 @@ const App = () => {
         {
           path: 'item/:category',
           element: <ItemsPages />
+        },
+        {
+          path: 'item-detail/:id',
+          element: <ItemDetail />
         },
         {
           path: 'about-page',

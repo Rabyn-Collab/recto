@@ -7,10 +7,12 @@ import ListCard from "../components/ListCard";
 
 const HomePage = () => {
   const [data, setData] = useState();
+  const [err, setErr] = useState();
 
   const getData = async () => {
     try {
       const response = await axios.get(categoryUrl);
+
       setData(response.data);
     } catch (err) {
 
@@ -19,13 +21,14 @@ const HomePage = () => {
   }
 
 
-
-
-
   useEffect(() => {
     getData();
 
   }, []);
+
+
+
+
 
 
 

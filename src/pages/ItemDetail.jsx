@@ -30,18 +30,16 @@ const ItemDetail = () => {
   }, []);
 
   const meal = data?.meals[0];
-  const m = "https://www.youtube.com/watch?v=IO0issT0Rmc";
-
   const vidKey = meal?.strYoutube?.split('=')[1];
-  console.log(vidKey);
+
 
   return (
     <div>
 
-      <iframe width="420" height="315"
+      {data && <iframe className="aspect-video"
         src={`https://www.youtube.com/embed/${vidKey}`}>
       </iframe>
-
+      }
 
     </div>
   )

@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import RootLayout from "./components/RootLayout";
+import Sam from "./pages/Sam";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -16,7 +17,14 @@ const App = () => {
         },
         {
           path: "about-page",
-          element: <About />
+          element: <About />,
+          children: [
+            {
+              path: 'sam',
+              element: <Sam />
+            }
+
+          ]
         },
         {
           path: "contact-page",

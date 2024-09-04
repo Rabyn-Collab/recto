@@ -1,19 +1,35 @@
-import { useState } from "react"
+import axios from "axios"
+import { useState } from "react";
+import { useEffect } from "react";
+import HoriCard from "../components/HoriCard";
 
 const Home = () => {
 
-  const [count, setCount] = useState(0);
+  const [data, setData] = useState();
 
+  const getData = async () => {
+    try {
+      const response = await axios.get('https://66d7d72637b1cadd80526aac.mockapi.io/movies');
+      setData(response.data);
+    } catch (err) {
 
-
-  const handleClick = () => {
-    setCount((prev) => prev + 1);
+    }
   }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+
   return (
-    <div>
+    <div className="p-5">
 
 
-      <button onClick={handleClick}>hello jee</button>
+      {data && data.map((movie, i) => {
+        return <HoriCard key={i} movie={movie} />
+
+      })}
+
 
 
     </div>

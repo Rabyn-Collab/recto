@@ -5,9 +5,12 @@ import {
   Typography,
   Button,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 
 const HoriCard = ({ movie }) => {
+
+
   return (
     <Card className="w-full max-w-[48rem] flex-row mb-7">
       <CardHeader
@@ -29,7 +32,7 @@ const HoriCard = ({ movie }) => {
         <Typography color="gray" className="mb-8 font-normal">
           {movie.plot}
         </Typography>
-        <a href="#" className="inline-block">
+        <Link to={`/detail-page/${movie.id}`} className="inline-block">
           <Button variant="text" className="flex items-center gap-2">
             Learn More
             <svg
@@ -47,7 +50,7 @@ const HoriCard = ({ movie }) => {
               />
             </svg>
           </Button>
-        </a>
+        </Link>
       </CardBody>
     </Card>
   )

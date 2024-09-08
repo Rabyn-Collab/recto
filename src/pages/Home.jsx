@@ -1,25 +1,14 @@
-import axios from "axios"
-import { useState } from "react";
-import { useEffect } from "react";
+
 import HoriCard from "../components/HoriCard";
+import { useApiHooks } from "../hooks/apihooks.js";
+
 
 const Home = () => {
 
-  const [data, setData] = useState();
 
-  const getData = async () => {
-    try {
-      const response = await axios.get('https://66d7d72637b1cadd80526aac.mockapi.io/movies');
-      setData(response.data);
-    } catch (err) {
+  const data = useApiHooks('https://66d7d72637b1cadd80526aac.mockapi.io/movies');
 
-    }
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
-
+  console.log(data);
 
   return (
     <div className="p-5">

@@ -4,6 +4,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import RootLayout from "./components/RootLayout";
 import Sam from "./pages/Sam";
+import Detail from "./pages/Detail";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -15,6 +16,14 @@ const App = () => {
           index: true,
           element: <Home />
         },
+
+
+        {
+          path: "detail-page/:id",
+          element: <Detail />
+        },
+
+
         {
           path: "about-page",
           element: <About />,

@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
     "@material-tailwind/react": "^2.1.9",
-=======
     "@faker-js/faker": "^8.4.1",
->>>>>>> 712857dd7ecdbe9f4235c1a3413b541c801ef04c
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

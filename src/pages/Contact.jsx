@@ -1,9 +1,17 @@
+import { MonialCard } from "../components/MonialCard"
+
 const Contact = () => {
+
+  const person = {
+    person_photo: '',
+    person_name: 'John Doe',
+    person_detail: ''
+  };
   return (
     <div>
+      <MonialCard person={person} />
 
-      <h1>Contact</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis temporibus, blanditiis exercitationem molestiae fugiat laborum voluptatem delectus adipisci, illum distinctio cumque id sit tenetur, hic deleniti cum labore ipsa inventore?</p>
+
     </div>
   )
 }

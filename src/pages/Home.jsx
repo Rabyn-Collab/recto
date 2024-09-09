@@ -5,7 +5,6 @@ import { useApiHooks } from "../hooks/apihooks.js";
 
 const Home = () => {
 
-
   const data = useApiHooks('https://66d7d72637b1cadd80526aac.mockapi.io/movies');
 
   console.log(data);

@@ -1,31 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
+import { useApiHooks } from "../hooks/apihooks";
 
 const Detail = () => {
 
   const { id } = useParams();
-  const [data, setData] = useState();
-
-  const getData = async () => {
-    try {
-      const response = await axios.get(`https://66d7d72637b1cadd80526aac.mockapi.io/movies/${id}`);
-      setData(response.data);
-    } catch (err) {
-
-    }
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-
-
-
-  console.log(data);
-
-
+  const data = useApiHooks(`https://66d7d72637b1cadd80526aac.mockapi.io/movies/${id}`);
 
 
   return (

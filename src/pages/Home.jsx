@@ -1,45 +1,59 @@
-
-import HoriCard from "../components/HoriCard";
-import { useApiHooks } from "../hooks/apihooks.js";
-
+import { Button } from "@material-tailwind/react";
+import axios from "axios";
+import { useState } from "react";
+import { useEffect } from "react"
+import PageButton from "../components/PageButton";
 
 const Home = () => {
 
-  const data = useApiHooks('https://66d7d72637b1cadd80526aac.mockapi.io/movies');
+  const [page, setPage] = useState(1);
+  const [data, setData] = useState();
+
+  const getData = async () => {
+    try {
+
+      const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
+        params: {
+          page: page
+        },
+
+        headers: {
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MmMxZTMzZjAxNTc1NWQyN2EyMzE3OTNjNDRlY2ZlZCIsIm5iZiI6MTcyNjAyNTk3OS44NDU1MzMsInN1YiI6IjY0MjI1ODg5MjNiZTQ2MDBmZWJlZDRjNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.npG9cJYr5l2Acbo5qiTIVaxSo9QkCEqMqahN5tPf20E'
+        }
+      });
 
 
-  const user = {
-    name: 'Rabin',
-    age: 20,
-    address: {
-      city: 'kolkata',
-      country: 'India',
-      v: ['j', 'i']
-    },
-    habits: ['eat', 'sleep', 'code']
-  };
+      setData(response.data);
+      console.log(response.data);
 
-  const persons = ['ram', 'shyam'];
-  const [m, n] = persons;
+    } catch (err) {
 
-  const { address: { city, v: [a, i] } } = user;
-  console.log(m);
+    }
 
+  }
 
+  useEffect(() => {
+    getData();
+  }, [page]);
 
   return (
-    <div className="p-5">
+    <div className=" p-4">
 
-      <h1>
-        {m}
-      </h1>
-      {data && data.map((movie, i) => {
-        return <HoriCard key={i} movie={movie} />
+      <PageButton data={data} setPage={setPage} page={page} />
+      <div className="grid grid-cols-4 gap-5">
 
-      })}
+        {data && data.results.map((movie) => (
+          <div key={movie.id} className="shadow-lg">
+            <h1>{movie.title}</h1>
+            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+          </div>
+        ))}
 
 
 
+      </div>
+
+      <PageButton data={data} setPage={setPage} page={page} />
     </div>
   )
 }

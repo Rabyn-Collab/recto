@@ -18,7 +18,7 @@ const Home = () => {
         },
 
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MmMxZTMzZjAxNTc1NWQyN2EyMzE3OTNjNDRlY2ZlZCIsIm5iZiI6MTcyNjAyNTk3OS44NDU1MzMsInN1YiI6IjY0MjI1ODg5MjNiZTQ2MDBmZWJlZDRjNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.npG9cJYr5l2Acbo5qiTIVaxSo9QkCEqMqahN5tPf20E'
+          Authorization: ''
         }
       });
 

@@ -1,59 +1,52 @@
-import { Button } from "@material-tailwind/react";
+import { Input, Typography } from "@material-tailwind/react"
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
-import { useEffect } from "react"
-import PageButton from "../components/PageButton";
 
 const Home = () => {
+  const [query, setQuery] = useState('avatar');
+  const [data, setData] = useState([]);
+  const sig = new AbortController();
 
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState();
 
   const getData = async () => {
     try {
-
-      const response = await axios.get('https://api.themoviedb.org/3/movie/popular', {
-        params: {
-          page: page
-        },
-
-        headers: {
-          Authorization: ''
-        }
-      });
-
-
+      const response = await axios.get('https://api.themoviedb.org/3/search/movie',
+        {
+          signal: sig.signal,
+          headers: {
+            Authorization: 'Bearer'
+          },
+          params: {
+            query: query
+          }
+        });
       setData(response.data);
-      console.log(response.data);
-
     } catch (err) {
-
+      console.log(err);
     }
-
   }
 
   useEffect(() => {
-    getData();
-  }, [page]);
+    getData(``);
+
+    return () => {
+      sig.abort();
+    }
+  }, [query]);
+
+  console.log(data);
+
 
   return (
-    <div className=" p-4">
-
-      <PageButton data={data} setPage={setPage} page={page} />
-      <div className="grid grid-cols-4 gap-5">
-
-        {data && data.results.map((movie) => (
-          <div key={movie.id} className="shadow-lg">
-            <h1>{movie.title}</h1>
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-          </div>
-        ))}
+    <div className="p-5 max-w-36">
 
 
+      <Input onChange={(e) => setQuery(e.target.value)} label="search movie" />
 
-      </div>
+      <Typography>{query}</Typography>
 
-      <PageButton data={data} setPage={setPage} page={page} />
+
     </div>
   )
 }

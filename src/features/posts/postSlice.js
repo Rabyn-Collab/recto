@@ -16,3 +16,6 @@ export const postSlice = createSlice({
 
   }
 });
+
+export const { addPost } = postSlice.actions;
+

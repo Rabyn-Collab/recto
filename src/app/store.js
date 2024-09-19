@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { postSlice } from "../features/posts/postSlice";
+import { songSlice } from "../services/songSlice";
 
 
 
 export const store = configureStore({
   reducer: {
-    [postSlice.name]: postSlice.reducer
+    songs: songSlice.reducer
   }
-});
+})

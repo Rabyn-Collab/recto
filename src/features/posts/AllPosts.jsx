@@ -1,10 +1,15 @@
-import AddForm from "./AddForm"
+import { useSelector } from "react-redux"
 
 const AllPosts = () => {
+
+  const { posts } = useSelector((state) => state.postSlice);
+
+  console.log(posts);
+
   return (
     <div>
 
-      <AddForm />
+
 
     </div>
   )

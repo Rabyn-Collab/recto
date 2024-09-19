@@ -1,8 +1,15 @@
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from "@material-tailwind/react"
 import { useFormik } from "formik"
 import { checkData, radioData } from "../shared/data";
+import { useDispatch } from "react-redux";
+import { addPost } from "./postSlice";
+import { useNavigate } from "react-router";
 
 const AddForm = () => {
+  const dispatch = useDispatch();
+
+  const nav = useNavigate();
+
 
   const { handleSubmit, values, handleChange, setFieldValue } = useFormik({
     initialValues: {
@@ -10,13 +17,17 @@ const AddForm = () => {
       detail: '',
       program: '',
       genres: [],
-      country: ''
+      country: '',
+      image: ''
     },
     onSubmit: (val) => {
-      console.log(val);
+      dispatch(addPost(val));
+      nav(-1);
     }
 
   });
+
+
 
   return (
     <div className="p-7 max-w-[300px]">
@@ -73,6 +84,17 @@ const AddForm = () => {
           label="Detail"
         />
 
+        <Input
+          name="image"
+          onChange={(e) => {
+            const file = e.target.files[0];
+            setFieldValue('image', URL.createObjectURL(file));
+
+          }}
+          label="Select an Image"
+          type="file" />
+
+        {values.image && <img src={values.image} alt="" />}
         <Button type="submit" size="sm">Submit</Button>
 
 

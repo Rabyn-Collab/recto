@@ -4,6 +4,7 @@ import { checkData, radioData } from "../shared/data";
 import { useDispatch } from "react-redux";
 import { addPost } from "./postSlice";
 import { useNavigate } from "react-router";
+import { nanoid } from "@reduxjs/toolkit";
 
 const AddForm = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,9 @@ const AddForm = () => {
       image: ''
     },
     onSubmit: (val) => {
-      dispatch(addPost(val));
+      // console.log({ ...val, id: nanoid() });
+
+      dispatch(addPost({ ...val, id: nanoid() }));
       nav(-1);
     }
 

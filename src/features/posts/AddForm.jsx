@@ -5,6 +5,17 @@ import { useDispatch } from "react-redux";
 import { addPost } from "./postSlice";
 import { useNavigate } from "react-router";
 import { nanoid } from "@reduxjs/toolkit";
+import * as Yup from 'yup';
+
+
+const valSchema = Yup.object({
+  title: Yup.string().min(5).max(50).required(),
+  // detail: '',
+  // program: '',
+  // genres: [],
+  // country: '',
+  // image: ''
+});
 
 const AddForm = () => {
   const dispatch = useDispatch();
@@ -12,21 +23,23 @@ const AddForm = () => {
   const nav = useNavigate();
 
 
-  const { handleSubmit, values, handleChange, setFieldValue } = useFormik({
+
+  const { handleSubmit, values, handleChange, setFieldValue, errors } = useFormik({
     initialValues: {
       title: '',
       detail: '',
       program: '',
       genres: [],
       country: '',
-      image: ''
+      images: []
     },
     onSubmit: (val) => {
       // console.log({ ...val, id: nanoid() });
 
       dispatch(addPost({ ...val, id: nanoid() }));
       nav(-1);
-    }
+    },
+    validationSchema: valSchema
 
   });
 
@@ -41,6 +54,7 @@ const AddForm = () => {
           value={values.title}
           label="Title"
         />
+        <h1 className="text-pink-700">{errors.title}</h1>
 
         <div className="flex gap-10">
           {radioData.map((val, i) => {
@@ -88,16 +102,32 @@ const AddForm = () => {
         />
 
         <Input
+          multiple
           name="image"
           onChange={(e) => {
-            const file = e.target.files[0];
-            setFieldValue('image', URL.createObjectURL(file));
-
+            const file = e.target.files;
+            let photos = [];
+            for (let a of file) {
+              photos.push(URL.createObjectURL(a));
+            }
+            setFieldValue('images', photos);
+            // const reader = new FileReader();
+            // reader.readAsDataURL(file);
+            // reader.addEventListener('load', (e) => {
+            //   setFieldValue('image', e.target.result);
+            // });
           }}
           label="Select an Image"
           type="file" />
 
-        {values.image && <img src={values.image} alt="" />}
+        {values.images.length > 0 && values.images?.map((i) => {
+          return <img src={i} alt="" />
+        })}
+
+        {/* {values.images &&
+        
+        
+        <img src={values.image} alt="" />} */}
         <Button type="submit" size="sm">Submit</Button>
 
 

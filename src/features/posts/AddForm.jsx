@@ -7,14 +7,17 @@ import { useNavigate } from "react-router";
 import { nanoid } from "@reduxjs/toolkit";
 import * as Yup from 'yup';
 
+const supportedExts = ['image/jpeg', 'image/png', 'image/gif', 'image/jpg'];
 
 const valSchema = Yup.object({
   title: Yup.string().min(5).max(50).required(),
-  // detail: '',
-  // program: '',
-  // genres: [],
-  // country: '',
-  // image: ''
+  detail: Yup.string().max(500).required(),
+  program: Yup.string().required(),
+  genres: Yup.array().min(1).required(),
+  country: Yup.string().required(),
+  image: Yup.mixed().test('fileType', 'invalid file', (e) => {
+    return e && supportedExts.includes(e.type);
+  })
 });
 
 const AddForm = () => {
@@ -24,14 +27,15 @@ const AddForm = () => {
 
 
 
-  const { handleSubmit, values, handleChange, setFieldValue, errors } = useFormik({
+  const { handleSubmit, values, handleChange, setFieldValue, errors, touched } = useFormik({
     initialValues: {
       title: '',
       detail: '',
       program: '',
       genres: [],
       country: '',
-      images: []
+      image: null,
+      imageReview: ''
     },
     onSubmit: (val) => {
       // console.log({ ...val, id: nanoid() });
@@ -54,7 +58,7 @@ const AddForm = () => {
           value={values.title}
           label="Title"
         />
-        <h1 className="text-pink-700">{errors.title}</h1>
+        {errors.title && touched.title && <h1 className="text-pink-700">{errors.title}</h1>}
 
         <div className="flex gap-10">
           {radioData.map((val, i) => {
@@ -66,7 +70,9 @@ const AddForm = () => {
               label={val.label}
               color={val.color} />
           })}
+
         </div>
+        {errors.program && touched.program && <h1 className="text-pink-700">{errors.program}</h1>}
 
         <div className="flex w-max gap-4">
           {checkData.map((val, i) => {
@@ -79,7 +85,9 @@ const AddForm = () => {
               value={val.value}
             />
           })}
+
         </div>
+        {errors.genres && touched.genres && <h1 className="text-pink-700">{errors.genres}</h1>}
 
         <div className="w-72">
           <Select
@@ -92,6 +100,7 @@ const AddForm = () => {
 
 
           </Select>
+          {errors.country && touched.country && <h1 className="text-pink-700">{errors.country}</h1>}
         </div>
 
         <Textarea
@@ -100,34 +109,37 @@ const AddForm = () => {
           value={values.detail}
           label="Detail"
         />
+        {errors.detail && touched.detail && <h1 className="text-pink-700">{errors.detail}</h1>}
 
         <Input
-          multiple
+          // multiple
           name="image"
           onChange={(e) => {
-            const file = e.target.files;
-            let photos = [];
-            for (let a of file) {
-              photos.push(URL.createObjectURL(a));
-            }
+            const file = e.target.files[0];
+            setFieldValue('image', file);
+            // let photos = [];
+            // for (let a of file) {
+            //   photos.push(URL.createObjectURL(a));
+            // }
+
             setFieldValue('images', photos);
-            // const reader = new FileReader();
-            // reader.readAsDataURL(file);
-            // reader.addEventListener('load', (e) => {
-            //   setFieldValue('image', e.target.result);
-            // });
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.addEventListener('load', (e) => {
+              setFieldValue('imageReview', e.target.result);
+            });
+
           }}
           label="Select an Image"
           type="file" />
 
-        {values.images.length > 0 && values.images?.map((i) => {
+        {/* {values.images.length > 0 && values.images?.map((i) => {
           return <img src={i} alt="" />
-        })}
+        })} */}
 
-        {/* {values.images &&
-        
-        
-        <img src={values.image} alt="" />} */}
+        {values.imageReview && errors.image &&
+          <img src={values.imageReview} alt="" />}
+        {errors.image && touched.image && <h1 className="text-pink-700">{errors.image}</h1>}
         <Button type="submit" size="sm">Submit</Button>
 
 

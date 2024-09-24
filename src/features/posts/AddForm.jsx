@@ -17,7 +17,9 @@ const valSchema = Yup.object({
   country: Yup.string().required(),
   image: Yup.mixed().test('fileType', 'invalid file', (e) => {
     return e && supportedExts.includes(e.type);
-  })
+  }).test('fileSize', 'too large', (e) => {
+    return e && e.size <= 1024 * 1024 * 5;
+  }).required()
 });
 
 const AddForm = () => {
@@ -122,7 +124,7 @@ const AddForm = () => {
             //   photos.push(URL.createObjectURL(a));
             // }
 
-            setFieldValue('images', photos);
+            // setFieldValue('images', photos);
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.addEventListener('load', (e) => {
@@ -131,14 +133,20 @@ const AddForm = () => {
 
           }}
           label="Select an Image"
+          accept="image/*"
           type="file" />
 
         {/* {values.images.length > 0 && values.images?.map((i) => {
           return <img src={i} alt="" />
         })} */}
 
-        {values.imageReview && errors.image &&
+        {values.imageReview &&
           <img src={values.imageReview} alt="" />}
+
+
+
+
+
         {errors.image && touched.image && <h1 className="text-pink-700">{errors.image}</h1>}
         <Button type="submit" size="sm">Submit</Button>
 

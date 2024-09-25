@@ -1,34 +1,70 @@
 import { Button, Checkbox, Input, Option, Radio, Select, Textarea, Typography } from "@material-tailwind/react"
 import { useFormik } from "formik"
 import { checkData, radioData } from "../shared/data";
-import { useDispatch } from "react-redux";
-import { addPost } from "./postSlice";
-import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost, updatePost } from "./postSlice";
+import { useNavigate, useParams } from "react-router";
 import { nanoid } from "@reduxjs/toolkit";
 import * as Yup from 'yup';
+import { supportedExts } from "./AddForm";
 
+const valSchema = Yup.object({
+  title: Yup.string().min(5).max(50).required(),
+  detail: Yup.string().max(500).required(),
+  program: Yup.string().required(),
+  genres: Yup.array().min(1).required(),
+  country: Yup.string().required(),
+  // image: Yup.mixed().test('fileType', 'invalid file', (e) => {
+  //   return e && supportedExts.includes(e.type);
+  // }).test('fileSize', 'too large', (e) => {
+  //   return e && e.size <= 1024 * 1024 * 5;
+  // })
+});
 
 
 const EditForm = () => {
+
+  const { posts } = useSelector((state) => state.postSlice);
+  const { id } = useParams();
+  const post = posts.find((post) => post.id === id);
+
+
   const dispatch = useDispatch();
+
 
   const nav = useNavigate();
 
 
-
   const { handleSubmit, values, handleChange, setFieldValue, errors, touched } = useFormik({
     initialValues: {
-      title: '',
-      detail: '',
-      program: '',
-      genres: [],
-      country: '',
+      title: post.title,
+      detail: post.detail,
+      program: post.program,
+      genres: post.genres,
+      country: post.country,
       image: null,
-      imageReview: ''
+      imageReview: post.imageReview
     },
     onSubmit: (val) => {
-      delete val.image
-      dispatch(addPost({ ...val, id: nanoid() }));
+
+
+      if (val.image === null) {
+
+        dispatch(updatePost({ ...val, id: post.id }));
+      } else {
+        const isValid = supportedExts.includes(val.image.type);
+        if (isValid) {
+          delete val.image
+          dispatch(updatePost({ ...val, id: post.id }));
+        } else {
+          alert('please provide valid image');
+        }
+      }
+
+
+
+
+
       nav(-1);
     },
     validationSchema: valSchema
@@ -53,6 +89,7 @@ const EditForm = () => {
             return <Radio
               key={i}
               name="program"
+              checked={val.value === values.program}
               onChange={handleChange}
               value={val.value}
               label={val.label}
@@ -67,6 +104,7 @@ const EditForm = () => {
             return <Checkbox
               key={i}
               name="genres"
+              checked={values.genres.includes(val.value)}
               onChange={handleChange}
               color={val.color}
               label={val.label}
@@ -80,13 +118,12 @@ const EditForm = () => {
         <div className="w-72">
           <Select
             name="country"
+            value={values.country}
             onChange={(e) => setFieldValue('country', e)}
             label="Select Country">
             <Option value="Nepal">Nepal</Option>
             <Option value="India">India</Option>
             <Option value="China">China</Option>
-
-
           </Select>
           {errors.country && touched.country && <h1 className="text-pink-700">{errors.country}</h1>}
         </div>

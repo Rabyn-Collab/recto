@@ -1,32 +1,29 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { baseUrl } from '../../constants/apis';
 
 export const todoApi = createApi({
   reducerPath: 'todoApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com', }),
+  baseQuery: fetchBaseQuery({ baseUrl: baseUrl, }),
 
   endpoints: (builder) => ({
 
-    getPosts: builder.query({
 
-      query: () => ({
-        url: '/posts',
+    getTodos: builder.query({
+
+      query: (q) => ({
+        url: '/todos',
         method: 'GET',
-
-
       })
 
 
+    }),
 
 
-
-    })
 
 
   })
-
-
 });
 
 
 
-export const { useGetPostsQuery } = todoApi;
+export const { useGetTodosQuery } = todoApi;

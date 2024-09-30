@@ -3,6 +3,7 @@ import RootLayout from "./RootLayout";
 import AddForm from "../features/posts/AddForm";
 import EditForm from "../features/posts/EditForm";
 import AllCocktails from "../features/cocktails/AllCocktails";
+import Items from "../features/cocktails/Items";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         element: <AllCocktails />
+      },
+      {
+        path: 'cata-items/:category',
+        element: <Items />
       },
       {
         path: 'add-form',

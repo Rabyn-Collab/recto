@@ -7,8 +7,7 @@ const AllCocktails = () => {
   const [fetchAll, { isLoading: isLoad, data: val, error }] = useLazyGetAllDrinksQuery();
 
   if (isLoading) {
-    return <h1>Loading....</h1>
-
+    return <h1>Loading....</h1>;
   }
   return (
     <div className="p-3">

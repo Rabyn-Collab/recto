@@ -16,6 +16,16 @@ export const cocktailApi = createApi({
       })
     }),
 
+    getDrinksByCategory: builder.query({
+      query: (q) => ({
+        url: '/filter.php',
+        params: {
+          c: q
+        },
+        method: 'GET',
+      })
+    }),
+
 
 
 
@@ -23,6 +33,6 @@ export const cocktailApi = createApi({
 });
 
 
-export const { useLazyGetAllDrinksQuery, useGetAllDrinksQuery } = cocktailApi;
+export const { useLazyGetAllDrinksQuery, useGetAllDrinksQuery, useGetDrinksByCategoryQuery } = cocktailApi;
 
 

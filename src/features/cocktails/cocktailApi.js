@@ -8,7 +8,7 @@ export const cocktailApi = createApi({
 
     getAllDrinks: builder.query({
       query: () => ({
-        url: '/',
+        url: '/list.php',
         params: {
           c: 'list'
         },

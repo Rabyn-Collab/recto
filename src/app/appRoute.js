@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import AddForm from "../features/posts/AddForm";
 import EditForm from "../features/posts/EditForm";
-import Todos from "../features/todos/Todos";
+import AllCocktails from "../features/cocktails/AllCocktails";
 
 export const router = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ export const router = createBrowserRouter([
 
       {
         index: true,
-        element: <Todos />
+        element: <AllCocktails />
       },
       {
         path: 'add-form',

@@ -9,7 +9,7 @@ const Items = () => {
 
   const { data, isLoading, error } = useGetDrinksByCategoryQuery(category.replace('-', '/'));
 
-  console.log(data);
+
 
 
 

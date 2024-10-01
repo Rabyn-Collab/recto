@@ -4,6 +4,7 @@ import { Card, CardBody, Typography, Avatar } from "@material-tailwind/react";
 
 const ItemList = ({ drinks }) => {
 
+  console.log(drinks);
   return (
     <Card className="w-96">
       <CardBody>
@@ -33,6 +34,7 @@ const ItemList = ({ drinks }) => {
                   <Typography color="blue-gray" variant="h6">
                     {strDrink}
                   </Typography>
+
 
                 </div>
               </div>

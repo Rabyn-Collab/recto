@@ -1,10 +1,14 @@
 import { Card, CardBody, Typography, Avatar } from "@material-tailwind/react";
+import { useNavigate } from "react-router";
 
 
 
 const ItemList = ({ drinks }) => {
 
-  console.log(drinks);
+
+
+
+  const nav = useNavigate();
   return (
     <Card className="w-96">
       <CardBody>
@@ -22,9 +26,10 @@ const ItemList = ({ drinks }) => {
             View all
           </Typography>
         </div>
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-gray-200 cursor-pointer">
           {drinks.map(({ strDrink, idDrink, strDrinkThumb }, index) => (
             <div
+              onClick={() => nav(`/cocktail-detail/${idDrink}`)}
               key={idDrink}
               className="flex items-center justify-between pb-3 pt-3 last:pb-0"
             >

@@ -27,12 +27,23 @@ export const cocktailApi = createApi({
     }),
 
 
+    getIdDetail: builder.query({
+      query: (q) => ({
+        url: '/lookup.php',
+        params: {
+          i: q
+        },
+        method: 'GET',
+      })
+    }),
+
+
 
 
   })
 });
 
 
-export const { useLazyGetAllDrinksQuery, useGetAllDrinksQuery, useGetDrinksByCategoryQuery } = cocktailApi;
+export const { useLazyGetAllDrinksQuery, useGetAllDrinksQuery, useGetDrinksByCategoryQuery, useGetIdDetailQuery } = cocktailApi;
 
 

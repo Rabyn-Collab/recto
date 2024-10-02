@@ -12,7 +12,15 @@ const AllCocktails = () => {
     return <h1>Loading....</h1>;
   }
 
+  // const person = {
+  //   name: 'ram',
+  //   age: 90
+  // };
 
+  // Object.entries(person).forEach(([key, value]) => {
+  //   console.log(`${key}: ${value}`);
+  // });
+  // console.log(Object.entries(person));
   return (
     <div className="p-3">
 

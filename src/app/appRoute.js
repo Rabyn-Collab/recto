@@ -4,6 +4,7 @@ import AddForm from "../features/posts/AddForm";
 import EditForm from "../features/posts/EditForm";
 import AllCocktails from "../features/cocktails/AllCocktails";
 import Items from "../features/cocktails/Items";
+import CocktailDetail from "../features/cocktails/CocktailDetail";
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: 'cata-items/:category',
         element: <Items />
+      },
+      {
+        path: 'cocktail-detail/:id',
+        element: <CocktailDetail />
       },
       {
         path: 'add-form',

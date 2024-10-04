@@ -22,9 +22,6 @@ export default CocktailDetail
 
 const CocktaiItem = ({ drink }) => {
 
-  const lk = 'sdkksdfIngredient';
-
-  console.log(lk.includes('Ingredient'))
   return (
     <div>
       {Object.entries(drink).map(([key, value]) => {
